@@ -1,153 +1,89 @@
 # AgriFlow AI
 ## Intelligent Farm Management and Predictive Analytics System
-AgriFlow is a comprehensive, production-ready full-stack application designed to modernize farm management. It integrates core agricultural record-keeping with advanced Machine Learning predictions, Voice Inputs, and dynamic PDF/CSV reporting.
 
-**Important Disclaimer**: Machine learning predictions in the current academic implementation are based on synthetic training patterns and should not be treated as guaranteed real-world predictions.
+AgriFlow AI is a comprehensive modern web application designed to empower farmers and agribusinesses with precision farm record-keeping, real-time financial tracking, livestock health monitoring, offline-first deterministic AI insights, and dynamic report generation.
+
+> **✨ Standalone Demo Version**: This repository is configured to run as a **self-contained, standalone demo**. It requires **zero backend, zero database (no MongoDB), and zero external API keys**. All data operations persist securely in browser `localStorage`.
 
 ---
 
 ## 🌟 Key Features
 
-- **Core CRM & Farm Management:** Secure JWT authentication, multi-farm management, field tracking with soil type metrics, and crop lifecycle tracking across 7 stages (Planted -> Germination -> Vegetative -> Flowering -> Ripening -> Harvested -> Sold).
-- **Financial Accounting:** Track Incomes and Expenses tied directly to specific crops, fields, or farms with dynamic cascading dropdowns, edit/delete actions, and instant P&L overview.
-- **Livestock Management:** Manage livestock inventory, feed schedules, medical treatments, vaccination records with due date tracking, and daily production (milk/eggs).
-- **Real-Time Analytics Dashboard:** Aggregated farm metrics, expense breakdown by category, yield distributions, and recent activities powered by MongoDB aggregation pipelines and `Recharts`.
-- **AI & Machine Learning Engine:**
-  - Conversational AI Assistant (powered by Gemini) for intelligent farm insights, data summarization, and agriculture advice.
-  - Context-aware intent detection connected securely to AgriFlow records.
-  - Weather integration providing instant location-based forecasting.
-  - Crop Yield Prediction based on farm size and crop type.
-  - Net Profit Forecasting with historical trend extrapolation.
-  - Expense Anomaly Detection identifying unusual or inflated expense entries.
-  - Smart Expense Category Recommendation based on natural language descriptions.
-- **Modern Accessibility & Input Tools:**
-
-  - Web Speech API integration for hands-free voice logging.
-- **Automated Alerts & PDF/CSV Reports:**
-  - Dynamic in-app notification center for automated harvest and vaccination reminders.
-  - On-demand PDF and CSV report generator with in-browser **Live PDF Preview**, print preview, and downloads using `reportlab`.
+- **🌾 Multi-Farm & Field Management:** Manage multiple farms, acreage, soil types (alluvial, clay loam, red sandy loam), and irrigation networks (drip, sprinkler, canal).
+- **🌱 Crop Lifecycle Tracking:** Full tracking across 7 stages (*planned*, *planted*, *growing*, *ready_for_harvest*, *harvested*, *sold*, *completed*).
+- **💰 Financial Accounting (₹ INR):** Track incomes and expenses with category tagging, dynamic cascading dropdowns, payment modes (UPI, Cash, Bank Transfer), and real-time P&L summaries.
+- **🐄 Livestock Management:** Track cattle, goats, and poultry with individual animal profiles, feeding records, medical treatments, upcoming vaccination schedules with alerts, and daily milk/egg production logs.
+- **📊 Real-Time Analytics Dashboard:** Instant operational KPIs (total farms, acreage, active crops, livestock count) and financial KPIs (total income, expenses, net profit) calculated dynamically.
+- **🤖 Deterministic AI Assistant & Predictors:**
+  - Natural language AI assistant analyzing live local farm data (harvest schedules, finances, best-performing crops, animal counts, and weather).
+  - Crop yield forecasting based on crop type, season, and acreage.
+  - Crop profit estimation using historical market margins.
+  - Expense anomaly detection flagging unusual costs.
+  - Smart expense category auto-suggester based on description keywords.
+- **📄 On-Demand Reports & Live Preview:** Generate financial statements and farm summary reports with live in-browser preview, CSV export, and PDF downloads.
+- **🔔 Notification Center:** Slide-out drawer with automated alerts for harvest-ready crops, upcoming livestock vaccinations, and profit milestones.
+- **🔄 One-Click Demo Reset:** Built-in safe reset control in the top navbar to instantly restore pristine sample data.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Quickstart (Run Locally)
 
-### Backend
-- **Framework:** FastAPI (Python 3.10+)
-- **Database:** MongoDB (Motor Async Driver)
-- **Authentication:** JWT (JSON Web Tokens), `passlib` (bcrypt)
-- **Machine Learning:** `scikit-learn`, `joblib`, `numpy`, `pandas`
-- **PDF Generation:** `reportlab`
+The standalone demo runs directly from the `frontend` directory using Node.js:
 
-### Frontend
-- **Framework:** React 18 + Vite
-- **Styling:** Vanilla Tailwind CSS
-- **Icons:** `lucide-react`
-- **Routing:** React Router DOM
-- **HTTP Client:** Axios (centralized `api` instance with auto JWT header injection)
-- **Charts:** Recharts
-- **OCR:** `tesseract.js`
-
----
-
-## 🚀 Local Installation & Setup
-
-### Prerequisites
-- Node.js (v18+)
-- Python (v3.10+)
-- MongoDB Community Server (or MongoDB Atlas connection string)
-
-### 1. Backend Setup
 ```bash
-cd backend
-python -m venv venv
-
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-
-### 2. Frontend Setup
-```bash
+# 1. Navigate to the frontend directory
 cd frontend
+
+# 2. Install dependencies
 npm install
+
+# 3. Start local development server
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 3. Getting Started
-1. Open [http://localhost:5173](http://localhost:5173) in your browser.
-2. Click **Create an account** on the login page to register your own account.
-3. Start managing your farms, crops, livestock, activities, and finances!
+Open [http://localhost:5173](http://localhost:5173) in your browser. The application opens directly into the dashboard with realistic preloaded demo data—no login required!
 
 ---
 
-## ☁️ Deployment on Render
+## ☁️ Deploy to Render (100% Free Static Site)
 
-This repository includes a `render.yaml` blueprint for easy deployment of both Backend and Frontend on [Render.com](https://render.com).
+This project is optimized to deploy as a **Static Site** on [Render.com](https://render.com) at zero cost.
 
-### Option A: Blueprint Deployment (Recommended)
-1. Go to [Render Dashboard](https://dashboard.render.com/) -> **Blueprints** -> **New Blueprint Instance**.
-2. Connect your GitHub repository `https://github.com/Aravindh2727/-FarmFlow.git`.
-3. Set your `MONGODB_URL` environment variable (from MongoDB Atlas).
-4. Click **Apply** – Render will build and deploy both the FastAPI Backend and Vite Frontend automatically!
+### Option A: Manual Setup via Render Dashboard
+1. Go to your **[Render Dashboard](https://dashboard.render.com/)** and click **New +** > **Static Site**.
+2. Connect this repository: `https://github.com/blackpanther272007-maker/AgriFlow-AI.git`.
+3. Configure the build settings:
+   - **Name:** `agriflow-ai`
+   - **Branch:** `main`
+   - **Root Directory:** `frontend`
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `dist`
+4. **Configure SPA Rewrite Rule** *(Required for page reloads on sub-routes)*:
+   - Under **Redirects/Rewrites**, click **Add Rule**:
+     - **Type:** `Rewrite`
+     - **Source:** `/*`
+     - **Destination:** `/index.html`
+5. Click **Create Static Site**.
 
-### Option B: Manual Service Setup
-
-#### 1. Backend Web Service:
-- **Environment:** `Python 3`
-- **Root Directory:** `backend`
-- **Build Command:** `pip install -r requirements.txt`
-- **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-- **Environment Variables:**
-  - `MONGODB_URL`: Your MongoDB Atlas connection URI (`mongodb+srv://...`)
-  - `DATABASE_NAME`: `farmflow`
-  - `JWT_SECRET`: A secure random string (minimum 32 characters)
-  - `JWT_ALGORITHM`: `HS256`
-  - `ACCESS_TOKEN_EXPIRE_MINUTES`: `1440`
-
-#### 2. Frontend Static Site:
-- **Root Directory:** `frontend`
-- **Build Command:** `npm install && npm run build`
-- **Publish Directory:** `dist`
-- **Rewrite Rules:** Add a rewrite rule for Single Page Application:
-  - Source: `/*`
-  - Destination: `/index.html`
-- **Environment Variables:**
-  - `VITE_API_URL`: `https://<YOUR-BACKEND-NAME>.onrender.com/api`
+### Option B: Blueprint Deployment
+1. In Render Dashboard, click **New +** > **Blueprint**.
+2. Connect `https://github.com/blackpanther272007-maker/AgriFlow-AI.git`.
+3. Render will automatically read [`render.yaml`](./render.yaml) and configure the static site with SPA routing rules.
+4. Click **Apply**.
 
 ---
 
-## 🧪 Testing
+## 🛠️ Architecture & Tech Stack
 
-The repository contains standalone integration and smoke test scripts that verify API flows against an active local backend:
+- **UI Framework:** React 19 + Vite
+- **Styling:** Vanilla Tailwind CSS v4
+- **Icons:** `lucide-react`
+- **Charts:** `recharts`
+- **Routing:** `react-router-dom`
+- **Data Layer:** `localStorage` with isolated `agriflow_demo_*` keys and self-healing corruption recovery
+- **Currency:** Indian Rupees (₹) with `en-IN` number formatting
 
-1. Ensure the backend server is running with an active MongoDB connection:
-   ```bash
-   cd backend
-   uvicorn app.main:app --port 8000
-   ```
-2. Run the authentication flow test:
-   ```bash
-   cd backend
-   python test_auth.py
-   ```
-3. Run the farm and crop management workflow test (requires the test user from auth test):
-   ```bash
-   cd backend
-   python test_farm_management.py
-   ```
-
-> **Note:** These are live-server integration scripts that make HTTP requests against a running API instance, rather than offline unit tests.
-
-## 🔒 Security
-
-- Enforces strict user ID ownership verification across all database queries to prevent unauthorized cross-tenant data access.
-- Passwords are encrypted using salted `bcrypt` hashes.
-- API endpoints are protected using bearer JWT tokens.
+---
 
 ## 📄 License
 This project is licensed under the MIT License.
