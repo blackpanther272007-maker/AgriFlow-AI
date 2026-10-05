@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login';
-import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Layout from './components/Layout';
 import Farms from './pages/Farms';
@@ -20,10 +18,11 @@ import Reports from './pages/Reports';
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      
-      {/* Protected Routes */}
+      {/* Demo Mode: Direct Access - No Login Walls */}
+      <Route path="/login" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/register" element={<Navigate to="/dashboard" replace />} />
+
+      {/* Main Application Routes */}
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
@@ -39,13 +38,14 @@ function App() {
           <Route path="/livestock/:id" element={<LivestockDetails />} />
           <Route path="/ai" element={<AIInsights />} />
           <Route path="/reports" element={<Reports />} />
-          {/* Redirect authenticated users from root to dashboard */}
+
+          {/* Root redirect to dashboard */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
       </Route>
 
-      {/* Catch-all redirect to login for unauthenticated, or dashboard if authenticated (handled by ProtectedRoute logic usually, but here we just redirect to root which handles it) */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      {/* Catch-all redirect to dashboard */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 }

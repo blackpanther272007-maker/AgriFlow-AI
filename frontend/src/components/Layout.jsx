@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LogOut, User as UserIcon, LayoutDashboard, Tractor, Menu, Bell, Sprout, Pickaxe, Receipt, Banknote, Dog, Brain, FileText, X } from 'lucide-react';
+import { LogOut, User as UserIcon, LayoutDashboard, Tractor, Menu, Bell, Sprout, Pickaxe, Receipt, Banknote, Dog, Brain, FileText, X, RotateCcw } from 'lucide-react';
 import NotificationCenter from './notifications/NotificationCenter';
 import Footer from './Footer';
 import api from '../utils/api';
+import { resetDemoData } from '../demo/demoStorage';
 
 const Layout = () => {
   const { user, logout } = useContext(AuthContext);
@@ -190,6 +191,19 @@ const Layout = () => {
                 {user?.role}
               </span>
             </div>
+            <button
+              onClick={() => {
+                if (window.confirm("Reset all AgriFlow Demo data back to the initial state? This will restore original sample farms, crops, livestock, and finances.")) {
+                  resetDemoData();
+                  window.location.reload();
+                }
+              }}
+              className="inline-flex items-center px-2.5 py-1.5 border border-emerald-300 text-xs font-semibold rounded-md text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-emerald-500"
+              title="Reset Demo Data"
+            >
+              <RotateCcw className="h-3.5 w-3.5 mr-1 text-emerald-600" />
+              <span>Reset Demo</span>
+            </button>
             <button
               onClick={logout}
               className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
