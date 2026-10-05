@@ -195,7 +195,7 @@ const Layout = () => {
               onClick={() => {
                 if (window.confirm("Reset all AgriFlow Demo data back to the initial state? This will restore original sample farms, crops, livestock, and finances.")) {
                   resetDemoData();
-                  window.location.reload();
+                  window.location.replace('/');
                 }
               }}
               className="inline-flex items-center px-2.5 py-1.5 border border-emerald-300 text-xs font-semibold rounded-md text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-emerald-500"

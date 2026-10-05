@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(() => {
     if (window.confirm("You are currently in AgriFlow AI Standalone Demo Mode. Would you like to reset demo data to the initial state?")) {
       resetDemoData();
-      window.location.reload();
+      window.location.replace('/');
     }
   }, []);
 
